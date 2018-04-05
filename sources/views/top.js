@@ -11,10 +11,11 @@ export default class TopView extends JetView{
 		var menu = {
 			view:"menu", id:"top:menu", 
 			width:180, layout:"y", select:true,
-			template:"<span class='webix_icon fa-#icon#'></span> #value# ",
+			template:"#value# ",
 			data:[
-				{ value:"DashBoard", id:"start", icon:"envelope-o" },
-				{ value:"Data",		 id:"data",  icon:"briefcase" }
+				{ value:"Contacts", id:"contacts" },
+				{ value:"Data",		 id:"data" },
+                { value:"Settings",		 id:"settings" }
 			]
 		};
 
