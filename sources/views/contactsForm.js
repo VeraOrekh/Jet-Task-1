@@ -1,19 +1,31 @@
 import {JetView} from "webix-jet";
-import {statuses} from "models/statuses";
-import {countries} from "models/countries";
+import {statuses} from "models/statusesCollection";
+import {countries} from "models/countriesCollection";
 
 export default class ContactsForm extends JetView{
 	config(){
-		//const _ = this.app.getService("locale")._;
+		const _ = this.app.getService("locale")._;
 
 		let form = {
 			view:"form",
 			id:"contactsForm:form",
 			elements:[
-				{view:"text", label:/*_(*/"User name"/*)*/, name:"Name"},
-				{view:"text", label:/*_(*/"Email"/*)*/, name:"Email"},
-				{view:"combo", id:"comboCountries", label:/*_(*/"Country"/*)*/, name:"Country", options:countries},
-				{view:"combo", id:"comboStatuses", label:/*_(*/"Status"/*)*/, name:"Status", options:statuses},
+				{view:"text", label:_("User name"), name:"Name"},
+				{view:"text", label:_("Email"), name:"Email"},
+				{
+					view:"combo",
+					id:"comboCountries",
+					label:_("Country"),
+					name:"Country",
+					options:{data:countries, body:{template:"#Name#"}},
+				},
+				{
+					view:"combo",
+					id:"comboStatuses",
+					label:_("Status"),
+					name:"Status",
+					options:{data:statuses, body:{template:"#Name#"}}
+				},
 				{}
 			]
 		};
@@ -21,7 +33,7 @@ export default class ContactsForm extends JetView{
 		let saveButton = {
 			view:"button",
 			id:"contactsForm:saveButton",
-			value:/*_(*/"Save"/*)*/,
+			value:_("Save"),
 			align:"right",
 			click:() =>{
 				let item = this.$$("contactsForm:form").getValues();
@@ -40,11 +52,6 @@ export default class ContactsForm extends JetView{
 				this.$$("contactsForm:form").setValues(data);
 			}
 		});
-
-	}
-	ready(){
-		//this.$$("comboCountries").getList().data.sync(countries);
-		//this.$$("comboStatuses").getList().data.sync(statuses);
 	}
 
 }

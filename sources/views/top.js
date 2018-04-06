@@ -1,10 +1,8 @@
 import {JetView, plugins} from "webix-jet";
 
-
-
 export default class TopView extends JetView{
 	config(){
-		//const lang = this.app.getService("locale").getLang();
+		const _ = this.app.getService("locale")._;
 
 		var header = {
 			type:"header", template:this.app.config.name
@@ -13,11 +11,11 @@ export default class TopView extends JetView{
 		var menu = {
 			view:"menu", id:"top:menu", 
 			width:180, layout:"y", select:true,
-			template:"#value# ",
+			template:"#value#",
 			data:[
-				{ value:/*_(*/"Contacts"/*)*/, id:"contacts" },
-				{ value:/*_(*/"Data"/*)*/,		 id:"data" },
-				{ value:/*_(*/"Settings"/*)*/,		 id:"settings" }
+				{ value:_("Contacts"), id:"contacts" },
+				{ value:_("Data"),		 id:"data" },
+				{ value:_("Settings"),		 id:"settings" }
 			]
 		};
 

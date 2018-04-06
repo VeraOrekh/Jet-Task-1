@@ -1,9 +1,9 @@
 import {JetView} from "webix-jet";
-import {contacts} from "models/contacts";
+import {contacts} from "models/contactsCollection";
 
 export default class ContactsList extends JetView{
 	config(){
-		//const _ = this.app.getService("locale")._;
+		const _ = this.app.getService("locale")._;
 
 		let list = {
 			view: "list",
@@ -13,7 +13,7 @@ export default class ContactsList extends JetView{
 			template:"<span>#Name#</span> <span class='webix_icon fa-times delete'></span>",
 			onClick: {
 				"fa-times":function(ev, id) {
-					this.remove(id);
+					contacts.remove(id);
 				}
 			},
 			on:{
@@ -27,24 +27,22 @@ export default class ContactsList extends JetView{
 
 		let addButton = {
 			view:"button",
-			value:/*_(*/"Add"/*)*/,
+			value:_("Add"),
 			click: () => {
-				this.$$("contactsList:list").add({Name:"New contact", Email:"new@mail.com"});
+				contacts.add({Name:"New contact", Email:"new@mail.com"});
 			}
 		};
 
 		return {
 			rows:[
+				{ template:_("Contacts"), type:"header" },
 				list, addButton
 			]
 		};
 
 	}
 	init(){
-		this.$$("contactsList:list").parse(contacts);
-	}
-	ready(){
-		this.$$("contactsList:list").select(this.$$("contactsList:list").getFirstId());
+		this.$$("contactsList:list").sync(contacts);
 	}
 
 }
