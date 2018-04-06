@@ -1,39 +1,41 @@
 import {JetView} from "webix-jet";
 import {contacts} from "models/contacts";
+import form from "views/contactsForm";
+import list from "views/contactsList";
 
 export default class ContctsView extends JetView{
-    config(){
-        var list = {
-            view: "list",
-            id: "contacts:list",
-            template: "#Email#",
-            select: true
-        };
+	config(){
+		//const _ = this.app.getService("locale")._;
 
-        var form = {
-            view:"form",
-            gravity:2,
-            elements:[
-                {view:"text", label:"User Name"},
-                {view:"text", label:"Email"},
-                {}
-            ]
-        };
+		var ui = {
+			autoheight:true,
+			rows:[
+				{
+					cols:[
+						{$subview:list},
+						{$subview:form}
+					]
+				}
+			]
+		};
 
-        var ui = {
-            autoheight:true,
-            rows:[
-                {
-                    cols:[
-                        list, form
-                    ]
-                }
-            ]
-        }
-
-        return ui;
-    }
-    init(){
-        this.$$("contacts:list").parse(contacts);
-    }
+		return ui;
+	}
+	init(view){
+		//view.queryView({ view:"list"}).parse(contacts);
+		this.on(this.app, "saveItem", (data) => {
+			var id = $$("contactsList:list").getSelectedId();
+			$$("contactsList:list").updateItem(id, data);
+		});
+	}
+	ready(){
+		form.bind(list);
+	}
+	urlChange(){
+		var id = this.getParam("id");
+		if (id)
+			this.$$("contactsList:list").select(id);
+		else
+			this.$$("contactsList:list").select(this.$$("contactsList:list").getFirstId());
+	}
 }

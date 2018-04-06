@@ -15,25 +15,26 @@ export default class DataView extends JetView{
 				{id:"data:countries", title:"Countries"},
 				{id:"data:statuses", title:"Statuses"}
 			],
-            on:{
-                onAfterSelect:function(id){
-                    $$(id).show();
-                }
-            }
+			on:{
+				onAfterSelect:function(id){
+					$$(id).show();
+				}
+			}
 		};
 
 		var countries = {
+
 			rows:[
 				{
-                    view:"datatable",
-                    id:"data:countries",
-                    editable:true,
+					view:"datatable",
+					id:"data:countries",
+					editable:true,
 					editaction:"dblclick",
 					select:true,
 					scrollX:false,
-                    columns:[
-                        {id:"Name", header:"Country", fillspace:true, editor:"text"}
-                    ]
+					columns:[
+						{id:"Name", header:"Country", fillspace:true, editor:"text"}
+					]
 				},
 				{
 					cols:[
@@ -42,19 +43,19 @@ export default class DataView extends JetView{
 							id:"data:addButtonCountries",
 							label:"Add",
 							click:function () {
-                                var id = $$("data:countries").getLastId();
-                                while($$("data:countries").exists(id))
-                                    id++;
-                                $$("data:countries").add({id:id, Name:"Country"});
-                            }
+								var id = $$("data:countries").getLastId();
+								while($$("data:countries").exists(id))
+									id++;
+								$$("data:countries").add({id:id, Name:"Country"});
+							}
 						},
 						{
-                            view:"button",
-                            id:"data:deleteButtonCountries",
-                            label:"Delete",
-                            click:function () {
+							view:"button",
+							id:"data:deleteButtonCountries",
+							label:"Delete",
+							click:function () {
 								$$("data:countries").remove($$("data:countries").getSelectedId());
-                            }
+							}
 						}
 					]
 				}
@@ -66,51 +67,60 @@ export default class DataView extends JetView{
 		var statuses = {
 			rows:[
 				{
-                    view:"datatable",
-                    id:"data:statuses",
-                    editable:true,
-                    editaction:"dblclick",
-                    select:true,
-                    scrollX:false,
-                    columns:[
-                        {id:"Name", header:"Name", fillspace:true, editor:"text"},
-                        {id:"Icon", header:"Icon", editor:"text"}
-                    ]
+					view:"datatable",
+					id:"data:statuses",
+					editable:true,
+					editaction:"dblclick",
+					select:true,
+					scrollX:false,
+					columns:[
+						{id:"Name", header:"Name", fillspace:true, editor:"text"},
+						{id:"Icon", header:"Icon", editor:"text"}
+					]
 				},
 				{
-                    cols:[
-                        {
-                            view:"button",
-                            id:"data:addButtonStatuses",
-                            label:"Add",
-                            click:function () {
-                                var id = $$("data:statuses").getLastId();
-                                while($$("data:statuses").exists(id))
-                                    id++;
-                                $$("data:statuses").add({id:id, Name:"Status", Icon:"Default"});
-                            }
-                        },
-                        {
-                            view:"button",
-                            id:"data:deleteButtonStatuses",
-                            label:"Delete",
-                            click:function () {
-                                $$("data:statuses").remove($$("data:statuses").getSelectedId());
-                            }
-                        }
-                    ]
+					cols:[
+						{
+							view:"button",
+							id:"data:addButtonStatuses",
+							label:"Add",
+							click:function () {
+								var id = $$("data:statuses").getLastId();
+								while($$("data:statuses").exists(id))
+									id++;
+								$$("data:statuses").add({id:id, Name:"Status", Icon:"Default"});
+							}
+						},
+						{
+							view:"button",
+							id:"data:deleteButtonStatuses",
+							label:"Delete",
+							click:function () {
+								$$("data:statuses").remove($$("data:statuses").getSelectedId());
+							}
+						}
+					]
 				}
 			]
 		};
+
+		/*let table = {
+			rows:[
+				datatable,
+				{cols:[
+					addButton, deleteButton
+				]}
+			]
+		};*/
 
 
 		var multiview = {
 			view:"multiview",
 			cells:[
 				countries,
-                statuses
+				statuses
 			]
-		}
+		};
 
 		var ui = {
 			cols:[
@@ -121,7 +131,7 @@ export default class DataView extends JetView{
 		return ui;
 	}
 	init(){
-        this.$$("data:countries").parse(countries);
-        this.$$("data:statuses").parse(statuses);
+		this.$$("data:countries").parse(countries);
+		this.$$("data:statuses").parse(statuses);
 	}
 }
