@@ -1,5 +1,5 @@
 import {JetView} from "webix-jet";
-import {contacts} from "models/contacts";
+//import {contacts} from "models/contacts";
 import form from "views/contactsForm";
 import list from "views/contactsList";
 
@@ -21,11 +21,11 @@ export default class ContctsView extends JetView{
 
 		return ui;
 	}
-	init(view){
+	init(/*view*/){
 		//view.queryView({ view:"list"}).parse(contacts);
 		this.on(this.app, "saveItem", (data) => {
-			var id = $$("contactsList:list").getSelectedId();
-			$$("contactsList:list").updateItem(id, data);
+			var id = this.$$("contactsList:list").getSelectedId();
+			this.$$("contactsList:list").updateItem(id, data);
 		});
 	}
 	ready(){

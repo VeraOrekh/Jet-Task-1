@@ -1,6 +1,7 @@
 import {JetView} from "webix-jet";
-import {countries} from "models/countries";
-import {statuses} from "models/statuses";
+import countriesTable from "views/countriesTable";
+import statusesTable from "views/statusesTable";
+
 
 export default class DataView extends JetView{
 	config(){
@@ -12,17 +13,17 @@ export default class DataView extends JetView{
 			width:300,
 			scroll:false,
 			data:[
-				{id:"data:countries", title:"Countries"},
-				{id:"data:statuses", title:"Statuses"}
+				{id:"countries", title:"Countries"},
+				{id:"statuses", title:"Statuses"}
 			],
 			on:{
 				onAfterSelect:function(id){
-					$$(id).show();
+					this.$scope.$$(id).show();
 				}
 			}
 		};
 
-		var countries = {
+		/*var countries = {
 
 			rows:[
 				{
@@ -117,8 +118,10 @@ export default class DataView extends JetView{
 		var multiview = {
 			view:"multiview",
 			cells:[
-				countries,
-				statuses
+				//countries,
+				//statuses
+				{id:"countries", $subview:countriesTable},
+				{id:"statuses", $subview:statusesTable}
 			]
 		};
 
@@ -129,9 +132,5 @@ export default class DataView extends JetView{
 		};
 
 		return ui;
-	}
-	init(){
-		this.$$("data:countries").parse(countries);
-		this.$$("data:statuses").parse(statuses);
 	}
 }

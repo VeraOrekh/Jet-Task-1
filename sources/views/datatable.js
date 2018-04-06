@@ -4,7 +4,6 @@ export default class DatatableView extends JetView{
 	config(){
 		let datatable = {
 			view:"datatable",
-			id:"datatable:datatable",
 			editable:true,
 			editaction:"dblclick",
 			select:true,
@@ -14,7 +13,6 @@ export default class DatatableView extends JetView{
 
 		let addButton = {
 			view:"button",
-			id:"datatable:addButton",
 			label:"Add",
 			click: () => {
 				this.datatable.add({});
@@ -23,7 +21,6 @@ export default class DatatableView extends JetView{
 
 		let deleteButton = {
 			view:"button",
-			id:"datatable:deleteButton",
 			label:"Delete",
 			click: () => {
 				let id = this.datatable.getSelectedId();

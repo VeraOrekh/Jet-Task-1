@@ -19,7 +19,7 @@ export default class ContactsList extends JetView{
 			on:{
 				onAfterSelect:(id) =>{
 					this.setParam("id", id, true);
-					let item = $$("contactsList:list").getSelectedItem();
+					let item = this.$$("contactsList:list").getSelectedItem();
 					this.app.callEvent("onContactSelected", [item]);
 				}
 			}
@@ -29,9 +29,9 @@ export default class ContactsList extends JetView{
 			view:"button",
 			value:/*_(*/"Add"/*)*/,
 			click: () => {
-				this.$$("contactsList:list").add({Name:"New contact", Email:"new@mail.com"})
+				this.$$("contactsList:list").add({Name:"New contact", Email:"new@mail.com"});
 			}
-		}
+		};
 
 		return {
 			rows:[
